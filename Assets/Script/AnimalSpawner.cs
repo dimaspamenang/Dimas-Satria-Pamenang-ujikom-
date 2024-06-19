@@ -1,29 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 public class AnimalSpawner : MonoBehaviour
 {
     public GameObject[] animalPrefabs;
     public float spawnInterval = 2f;
-    public Transform[] spawnPoints;
 
-    private float spawnTimer = 0f;
-
-    void Update()
+    // Start is called before the first frame update
+    void Start()
     {
-        spawnTimer += Time.deltaTime;
-        if (spawnTimer >= spawnInterval)
-        {
-            SpawnAnimal();
-            spawnTimer = 0f;
-        }
+        InvokeRepeating("SpawnAnimal", 0f, spawnInterval);
     }
 
     void SpawnAnimal()
     {
-        int spawnPointIndex = Random.Range(0, spawnPoints.Length);
-        int animalIndex = Random.Range(0, animalPrefabs.Length);
+        int randomIndex = Random.Range(0, animalPrefabs.Length);
+        GameObject animalPrefab = animalPrefabs[randomIndex];
 
-        GameObject animal = Instantiate(animalPrefabs[animalIndex], spawnPoints[spawnPointIndex].position, Quaternion.identity);
+        GameObject animal = Instantiate(animalPrefab, transform.position, Quaternion.identity);
+
+        Vector3 randomOffset = new Vector3(Random.Range(-1f, 1f), 0f, 0f);
+        animal.transform.position += randomOffset;
     }
 }

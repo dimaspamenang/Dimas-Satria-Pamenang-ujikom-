@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    public int foodHungerValue = 25; // Nilai kelaparan dari makanan
+    public int foodHungerValue = 25;
     public TextMeshProUGUI scoreText;
     private int score = 0;
 
